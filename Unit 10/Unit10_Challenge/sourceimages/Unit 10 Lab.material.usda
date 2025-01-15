@@ -1,0 +1,730 @@
+#usda 1.0
+(
+    "Exported from Adobe Substance 3D Painter 10.1.1"
+    defaultPrim = "Material_Outdoor_obj"
+)
+
+def "Material_Outdoor_obj"
+{
+    def Scope "material"
+    {
+        def Material "aiLambert1SG" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/Sean O'Hara/Desktop/Git/Class-1200/Unit 10/Unit 10 Lab/Unit 10 Lab.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_Normal.png@
+            asset inputs:height_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_Height.png@
+            asset inputs:metallic_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_Metallic.png@
+            asset inputs:opacity_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_BaseColor.png@
+            asset inputs:roughness_tex = @Unit 10 Lab_textures/Material_Outdoor_aiLambert1SG_Roughness.png@
+            token outputs:adobe:surface.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/aiLambert1SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/aiLambert1SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+
+        def Material "lambert3SG" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/Sean O'Hara/Desktop/Git/Class-1200/Unit 10/Unit 10 Lab/Unit 10 Lab.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_Normal.png@
+            asset inputs:height_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_Height.png@
+            asset inputs:metallic_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_Metallic.png@
+            asset inputs:opacity_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_BaseColor.png@
+            asset inputs:roughness_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert3SG_Roughness.png@
+            token outputs:adobe:surface.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert3SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert3SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+
+        def Material "lambert4SG" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/Sean O'Hara/Desktop/Git/Class-1200/Unit 10/Unit 10 Lab/Unit 10 Lab.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_Normal.png@
+            asset inputs:height_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_Height.png@
+            asset inputs:metallic_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_Metallic.png@
+            asset inputs:opacity_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_BaseColor.png@
+            asset inputs:roughness_tex = @Unit 10 Lab_textures/Material_Outdoor_lambert4SG_Roughness.png@
+            token outputs:adobe:surface.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.05
+                    float inputs:metallic.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Material_Outdoor_obj/material/lambert4SG.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Material_Outdoor_obj/material/lambert4SG/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+    }
+
+    over "Fencepoll_12_Fence_Material"
+    {
+        over "Fencepoll_12_Fence_Material" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Material_Detailed_Grave10"
+    {
+        over "Material_Detailed_Grave10" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Material_Detailed_Grave9"
+    {
+        over "Material_Detailed_Grave9" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_11"
+    {
+        over "Fence_Material_Fencepoll_11" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_3"
+    {
+        over "Fence_Material_Fencepoll_3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_7"
+    {
+        over "Fence_Material_Fencepoll_7" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_5"
+    {
+        over "Fence_Material_Fencepoll_5" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_10"
+    {
+        over "Fence_Material_Fencepoll_10" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_2"
+    {
+        over "Fence_Material_Fencepoll_2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_4"
+    {
+        over "Fence_Material_Fencepoll_4" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_8"
+    {
+        over "Fence_Material_Fencepoll_8" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_9"
+    {
+        over "Fence_Material_Fencepoll_9" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_6"
+    {
+        over "Fence_Material_Fencepoll_6" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Material_Crypt_Door2"
+    {
+        over "Material_Crypt_Door2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/aiLambert1SG>
+        }
+    }
+
+    over "Material_Crypt_Door1"
+    {
+        over "Material_Crypt_Door1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/aiLambert1SG>
+        }
+    }
+
+    over "Fence_Material_Grave_CementL"
+    {
+        over "Fence_Material_Grave_CementL" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Fence_Material_Fence_bar2"
+    {
+        over "Fence_Material_Fence_bar2" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Material_Crypt_Base"
+    {
+        over "Material_Crypt_Base" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/aiLambert1SG>
+        }
+    }
+
+    over "Fence_Material_Fencepoll_1"
+    {
+        over "Fence_Material_Fencepoll_1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+
+    over "Material_Detailed_Grave8"
+    {
+        over "Material_Detailed_Grave8" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Fence_Material_Grave_CementR"
+    {
+        over "Fence_Material_Grave_CementR" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Material_Detailed_Grave3"
+    {
+        over "Material_Detailed_Grave3" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Material_Detailed_Grave7"
+    {
+        over "Material_Detailed_Grave7" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Material_Detailed_Grave6"
+    {
+        over "Material_Detailed_Grave6" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert3SG>
+        }
+    }
+
+    over "Fence_Material_Fence_bar1"
+    {
+        over "Fence_Material_Fence_bar1" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Material_Outdoor_obj/material/lambert4SG>
+        }
+    }
+}
+
