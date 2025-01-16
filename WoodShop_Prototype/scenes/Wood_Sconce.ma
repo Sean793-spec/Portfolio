@@ -1,19 +1,20 @@
 //Maya ASCII 2024 scene
 //Name: Wood_Sconce.ma
-//Last modified: Wed, Jan 15, 2025 02:18:33 PM
+//Last modified: Thu, Jan 16, 2025 08:02:23 AM
 //Codeset: 932
 requires maya "2024";
 requires "stereoCamera" "10.0";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiSkyDomeLight"
 		 "mtoa" "5.3.4.1";
 requires -nodeType "mayaUsdLayerManager" -dataType "pxrUsdStageData" "mayaUsdPlugin" "0.25.0";
+requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2024";
 fileInfo "version" "2024";
 fileInfo "cutIdentifier" "202310181224-69282f2959";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "418C8A3E-4C72-E188-AE51-89809D5626E4";
+fileInfo "UUID" "C672D805-4100-041E-BE9B-32993DE071F3";
 createNode transform -s -n "persp";
 	rename -uid "3210B127-4147-D4F1-A49B-24B0CBE32338";
 	setAttr ".v" no;
@@ -249,27 +250,24 @@ createNode mesh -n "Wall_SconceShape" -p "Wall_Sconce";
 		 0.37741315 0.74877048 0.37738776 0.75 0.3772265 0.75133955 0.37704626 0.75268167
 		 0.37685072 0.75400692 0.37664172 0.75531006 0 0 1 0 1 1 0 1 0 0 1 1 0 1 0 0 1 0 1
 		 0.99999881 0 0.99999881 0 0 1 1 0 1 0.73212171 -3.4592854e-10 0.75733238 -1.7592798e-09
-		 0.78254277 -1.1699564e-09 nan nan 0.85937631 0.20994224 0.84374952 0.22329748 0.65625
+		 0.78254277 -1.1699564e-09 0 0 0.85937631 0.20994224 0.84374952 0.22329748 0.65625
 		 0.22329749 0.64062345 0.20994185 0.64062339 2.9294132e-09 0.70691133 2.663478e-10
-		 nan nan nan nan nan nan nan nan nan nan nan nan nan nan 0.625 0.91808885 0.62499994
-		 0.98437697 0.21626516 8.3439406e-09 0.24147567 3.7807411e-09 0.26668632 2.3459152e-09
-		 nan nan 0.34374991 0.22329755 0.15625013 0.22329748 0.14062349 0.20994222 nan nan
-		 0.3593767 0.20994212 0.36992392 -6.0386913e-09 0.37145719 -6.4906907e-09 0.37297571
-		 -6.9383388e-09 0.37447336 -7.3798372e-09 0.37594521 -7.8137301e-09 nan nan 0.3773877
-		 0.55341011 0.37738779 0.74332416 0.37642115 0.75658554 0.62357837 0.75658303 0.62335831
-		 0.75531012 0.62314928 0.75400698 0.62295377 0.75268173 0.62277317 0.75133699 0.62261224
-		 0.75000006 0.62258685 0.74876845 0.62257403 0.74755061 0.6225732 0.74637043 0.62258238
-		 0.74522257 0.62259829 0.74413687 0.625 0.52443433 0.623806 0.99218917 0.37639827
-		 0.99352562 nan nan 0.623806 0.75781119 nan nan nan nan nan nan nan nan nan nan;
+		 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.625 0.91808885 0.62499994 0.98437697 0.21626516 8.3439406e-09
+		 0.24147567 3.7807411e-09 0.26668632 2.3459152e-09 0 0 0.34374991 0.22329755 0.15625013
+		 0.22329748 0.14062349 0.20994222 0 0 0.3593767 0.20994212 0.36992392 -6.0386913e-09
+		 0.37145719 -6.4906907e-09 0.37297571 -6.9383388e-09 0.37447336 -7.3798372e-09 0.37594521
+		 -7.8137301e-09 0 0 0.3773877 0.55341011 0.37738779 0.74332416 0.37642115 0.75658554
+		 0.62357837 0.75658303 0.62335831 0.75531012 0.62314928 0.75400698 0.62295377 0.75268173
+		 0.62277317 0.75133699 0.62261224 0.75000006 0.62258685 0.74876845 0.62257403 0.74755061
+		 0.6225732 0.74637043 0.62258238 0.74522257 0.62259829 0.74413687 0.625 0.52443433
+		 0.623806 0.99218917 0.37639827 0.99352562 0 0 0.623806 0.75781119 0 0 0 0 0 0 0 0
+		 0 0;
 	setAttr ".cuvs" -type "string" "map1";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 17 ".pt";
-	setAttr ".pt[44]" -type "float3" 3.1292439e-07 0 5.2154064e-08 ;
-	setAttr ".pt[45]" -type "float3" -3.1292439e-07 0 0 ;
-	setAttr ".pt[46]" -type "float3" -3.1292439e-07 0 -5.2154064e-08 ;
-	setAttr ".pt[47]" -type "float3" 3.1292439e-07 0 0 ;
+	setAttr -s 4 ".pt[44:47]" -type "float3"  3.1292439e-07 0 5.2154064e-08 
+		-3.1292439e-07 0 0 -3.1292439e-07 0 -5.2154064e-08 3.1292439e-07 0 0;
 	setAttr -s 98 ".vt[0:97]"  -0.48089996 0.5 0.2500267 -0.5 0.39318943 0.37500048
 		 -0.48089996 0.5 -0.25002384 -0.5 0.39318943 -0.37499762 0.48089996 0.5 0.2500267
 		 0.5 0.39318943 0.37500048 0.48089996 0.5 -0.25002384 0.5 0.39318943 -0.37499762 -0.49044916 0.28635883 0.50000238
@@ -1527,7 +1525,7 @@ createNode camera -n "cameraShape1" -p "camera1";
 createNode transform -n "persp1";
 	rename -uid "AEB2F4D7-4F92-EE9E-8491-B9AEA41D57C0";
 	setAttr ".t" -type "double3" 6.0623114042167057 4.2016470409313076 5.9770430162356991 ;
-	setAttr ".r" -type "double3" 331.13042730834457 -1049.8648382726146 -3.3263087853082083 ;
+	setAttr ".r" -type "double3" 331.13042730834462 -1049.8648382726146 -3.3263087853082083 ;
 createNode camera -n "persp1Shape" -p "persp1";
 	rename -uid "3713815A-4EF7-BE09-909C-F8BAB770D4EB";
 	setAttr -k off ".v";
@@ -2009,28 +2007,11 @@ createNode mesh -n "pCylinderShape5" -p "pCylinder5";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 23 ".pt";
-	setAttr ".pt[61]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[62]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[63]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[64]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[65]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[66]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[67]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[68]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[69]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[70]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[71]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[72]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[73]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[74]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[75]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[76]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[77]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[78]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[79]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[80]" -type "float3" 4.7683716e-07 0 0 ;
-	setAttr ".pt[81]" -type "float3" 4.7683716e-07 0 0 ;
+	setAttr -s 21 ".pt[61:81]" -type "float3"  4.7683716e-07 0 0 4.7683716e-07 
+		0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 
+		0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 
+		0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 
+		0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0 4.7683716e-07 0 0;
 	setAttr -s 322 ".vt";
 	setAttr ".vt[0:165]"  0.95105743 1.000003814697 -0.3090167 0.80901814 1.000003814697 -0.58778572
 		 0.58778572 1.000003814697 -0.80901718 0.30901718 1.000003814697 -0.951056 0 1.000003814697 -1.000000476837
@@ -2898,20 +2879,20 @@ createNode mesh -n "pCylinderShape5" -p "pCylinder5";
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "167CBFEE-4C3B-86AC-2242-E3A3BE573EF8";
+	rename -uid "6E264FE7-4C64-9A6F-A274-51B282E0A6D4";
 	setAttr -s 9 ".lnk";
 	setAttr -s 9 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "BDB6D847-4CE5-9011-48B9-D38025455CF2";
+	rename -uid "E8C54E94-4708-C6E6-A7BA-5CB4D45E18CF";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "1AA13578-48E6-FD50-F57A-3FBC6D3B3E5C";
+	rename -uid "779A72E6-4184-F0B9-E7B9-00AEAAB2E3B8";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "4BAF75F1-4681-C122-DB29-F699CDA48A88";
+	rename -uid "FF90E33A-4F75-2197-7EF7-D5A4306703DF";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "3BF9FA0F-4DC9-F2C1-3B88-699BAB2109AE";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "B21FCAB2-4E06-77C3-64E8-C78A2AAB071C";
+	rename -uid "18585E0F-4721-3479-9A00-6B961047276D";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "7DAB6C41-46E7-F3F5-AB3B-F9BB9ADC98E8";
 	setAttr ".g" yes;
@@ -3088,7 +3069,7 @@ createNode shadingEngine -n "lambert4SG";
 createNode materialInfo -n "materialInfo7";
 	rename -uid "5823835E-4B3F-3EF5-096A-0AB6352BA6A1";
 createNode mayaUsdLayerManager -n "mayaUsdLayerManager1";
-	rename -uid "BDDD4D11-4CAB-C270-3196-A284AE32B18E";
+	rename -uid "4E6E9568-49BE-32D9-8E56-DC956076DAF0";
 	setAttr ".sst" -type "string" "";
 select -ne :time1;
 	setAttr ".o" 51;
